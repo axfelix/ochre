@@ -1,0 +1,5 @@
+# MacOS
+sips -s format icns icon.png --out icon.icns
+
+# Windows
+convert icon.png -define icon:auto-resize=64,48,32,16 icon.ico
