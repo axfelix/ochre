@@ -16,8 +16,10 @@
     "electron": "^9.0.5",
     "electron-squirrel-startup": "^1.0.0",
     "electron-tooltip": "^1.1.5",
+    "glob": "^7.1.6",
     "node-notifier": "^5.4.0",
-    "update-electron-app": "^1.3.0"
+    "update-electron-app": "^1.3.0",
+    "tmp": "^0.2.1"
   },
   "files": [
     "win/*",

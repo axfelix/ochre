@@ -11,9 +11,14 @@ let mainWindow = null
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    width: 550,
-    height: 700,
+    width: 400,
+    height: 300,
+    resizable: false,
     backgroundColor: "#D6D8DC",
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true
+    }
   });
 
   if (app.dock) { app.dock.show() };

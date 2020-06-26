@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="utf-8">
-  <title>MoveIt</title>
+  <title>Ochre</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
   <script type="text/javascript">
     let shell = require('electron').remote.shell
     document.addEventListener('click', function (event) {
@@ -20,108 +20,27 @@
 <body>
   <div id="container" class="container-fluid">
 
+    <br/>
+
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Contact Name</h3>
-        <input name="contactname" id="contactname" type="text" size="60"/>
+        <h3>Folder containing PDFs</h3>
+        <input name="pdfdir" id="pdfdir" type="text" size="40" readonly="readonly"/>
       </div>
     </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Position / Title</h3>
-        <input name="jobtitle" id="jobtitle" type="text" size="60"/>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Department / Organization</h3>
-        <input name="department" id="department" type="text" size="60"/>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Email Address</h3>
-        <input name="email" id="email" type="text" size="60"/>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Telephone</h3>
-        <input name="phone" id="phone" type="text" size="60"/>
-      </div>
-    </div>
-
-    <br/><hr/>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Record Creator</h3>
-        <input name="creator" id="creator" type="text" size="60"/>
-        <img class="exp_icon0" src="icon_explanation.png" width="25" height="25" data-tooltip="The name of the department or unit responsible for creating and maintaing the records." >
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>RRSDA Number</h3>
-        Internal SFU Users Only. See <a href="http://www.sfu.ca/archives2/dur/rrsdas.html">Overview</a>.
-        <input name="rrsda" id="rrsda" type="text" size="60"/>
-        <img class="exp_icon0" src="icon_explanation.png" width="25" height="25" data-tooltip="The Records Retention Schedule and Disposal Authority (RRSDA) number that applies to the records." >
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Transfer Title</h3>
-        <input name="title" id="title" type="text" size="60"/>
-        <img class="exp_icon0" src="icon_explanation.png" width="25" height="25" data-tooltip="The name of the records series if known, or a brief descriptor." >
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Date Range</h3>
-        From: <select name="datefrom" id="datefrom"></select> To <select name="dateto" id="dateto"></select>
-      </div>
-    </div>  
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Records Description</h3>
-        <textarea name="description" id="description" rows="4" wrap="soft" cols="60"></textarea>
-      </div>
-    </div> 
-
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-        <h3>Other Metadata Available?</h3>
-        e.g. file lists, indices, documentation.<br/>
-        If so, please provide a brief description.
-        <textarea name="metadata" id="metadata" rows="4" wrap="soft" cols="60"></textarea>
-      </div>
-    </div> 
 
     <br/><br/>
 
     <div class="button">
-      <button class="btn btn-primary" id="package">Create Transfer Package</button>
+      <button class="btn btn-primary" id="ocr">OCR</button>
     </div>
 
     <br/><br/>
 
+    <p><a href="https://axfelix.github.io">axfelix.github.io</a>
+
   </div>
-  <script src="makePackage.js" charset="utf-8"></script>
-  <script type="text/javascript">
-    for (i = new Date().getFullYear(); i > 1969; i--)
-    {
-        $('#datefrom').append($('<option />').val(i).html(i));
-        $('#dateto').append($('<option />').val(i).html(i));
-    }
-  </script>
+  <script src="ochre.js" charset="utf-8"></script>
 </body>
 
 </html>
