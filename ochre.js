@@ -36,44 +36,44 @@ function ocr() {
 }
 
 function burst_pdf(input, output) {
-  spawn('win/gs/bin/gswin64.exe', ["-o", output, "-sDEVICE=png16m",
-           "-r300", "-dPDFFitPage=true", input]) => {
+  exec('win/gs/bin/gswin64.exe', ["-o", output, "-sDEVICE=png16m",
+           "-r300", "-dPDFFitPage=true", input], (err, stdout, stderr) => {
   	if (err) {
   		console.error(err);
   		return;
   	}
   	console.log(stdout);
-  }
+  });
 }
 
 function ocr_file(input, outname) {
-  spawn('win/Tesseract-OCR/tesseract.exe', [input, outname, "pdf"]) => {
+  spawn('win/Tesseract-OCR/tesseract.exe', [input, outname, "pdf"], (err, stdout, stderr) => {
   	if (err) {
   		console.error(err);
   		return;
   	}
   	console.log(stdout);
-  }
+  });
 }
 
 function join_pdfs(inputs, output) {
-  spawn('win/PDFtk/bin/PdftkXp.exe', [inputs, "cat", "output", output]) => {
+  spawn('win/PDFtk/bin/PdftkXp.exe', [inputs, "cat", "output", output], (err, stdout, stderr) => {
   	if (err) {
   		console.error(err);
   		return;
   	}
   	console.log(stdout);
-  }
+  });
 }
 
 function scale_pdf(input, output) {
-  spawn('win/gs/bin/gswin64.exe', ["-sDEVICE=pdfwrite", "-sPAPERSIZE=letter", "-dFIXEDMEDIA", "-dPDFFitPage", "-o", output, input]) => {
+  spawn('win/gs/bin/gswin64.exe', ["-sDEVICE=pdfwrite", "-sPAPERSIZE=letter", "-dFIXEDMEDIA", "-dPDFFitPage", "-o", output, input], (err, stdout, stderr) => {
   	if (err) {
   		console.error(err);
   		return;
   	}
   	console.log(stdout);
-  }
+  });
 }
 
 document.getElementById("ocr").addEventListener("click", ocr);
