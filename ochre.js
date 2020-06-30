@@ -20,28 +20,31 @@ function setlocation() {
 }
 
 function ocr() {
+  buttonBlock = document.getElementById("ocr");
+  buttonBlock.style.display = "none";
   fs.readdir(document.getElementById("pdfdir").value, function (err, files) {
     if (err) {
       return console.log("Couldn't parse directory path.");
     }
     files.forEach(function (file) {
+        let input = path.join(document.getElementById("pdfdir").value, file);
         let tempdirObject = tmp.dirSync();
         let tempdir = tempdirObject.name;
         let outpath = path.join(tempdir, "out-%05d.png");
-        execSync(commandJoin([path.join("win","gs","bin","gswin64c.exe"), "-o", path.join(tempdir, "out-%05d.png"), "-sDEVICE=png16m",
-           "-r300", "-dPDFFitPage=true", file]));
-        for (const f in glob.sync(path.join(tempdir, "*.png"))) {
-          let outname = path.join(tempdir, "*.png");
-          execSync(commandJoin([path.join("win","Tesseract-OCR","tesseract.exe"), input, outname, "pdf"]));
-        }
-        pdfs = glob.sync(path.join(tempdir, "*.pdf")).sort();
-        joined_file = path.join(tempdir, "joined.pdf");
-        execSync(commandJoin([path.join("win","PDFtk","bin","PdftkXp.exe"), pdfs, "cat", "output", joined_file]));
-        let output = file.concat('.ocr.pdf')
+        execSync(commandJoin([path.join("win","gs","bin","gswin64c.exe"), "-o", path.join(tempdir, "%05d.png"), "-sDEVICE=png16m",
+           "-r300", "-dPDFFitPage=true", input]));
+        glob(path.join(tempdir, "*.png"), function (er, files) {
+          files.forEach(f => execSync(commandJoin([path.join("win","Tesseract-OCR","tesseract.exe"), f, path.join(tempdir, path.parse(f).name), "pdf"])));
+        });
+        let pdfs = glob.sync(path.join(tempdir, "*.pdf")).sort();
+        let joined_file = path.join(tempdir, "joined.pdf");
+        execSync(commandJoin([path.join("win","PDFtk","bin","pdftk.exe"), pdfs, "cat", "output", joined_file]));
+        let output = input.concat('.ocr.pdf')
         execSync(commandJoin([path.join("win","gs","bin","gswin64.exe"), "-sDEVICE=pdfwrite", "-sPAPERSIZE=letter", "-dFIXEDMEDIA", "-dPDFFitPage", "-o", output, joined_file]));
         tempdirObject.removeCallback();
     });
   });
+  buttonBlock.style.display = "block";
 }
 
 document.getElementById("ocr").addEventListener("click", ocr);
