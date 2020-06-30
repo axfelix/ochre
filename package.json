@@ -13,6 +13,7 @@
     "start": "electron ."
   },
   "dependencies": {
+    "command-join": "^2.0.0",
     "electron": "^9.0.5",
     "electron-squirrel-startup": "^1.0.0",
     "electron-tooltip": "^1.1.5",

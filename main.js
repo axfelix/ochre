@@ -13,7 +13,7 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 400,
     height: 300,
-    resizable: false,
+    //resizable: false,
     backgroundColor: "#D6D8DC",
     webPreferences: {
       nodeIntegration: true,
