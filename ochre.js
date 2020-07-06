@@ -12,6 +12,8 @@ const remote = require('electron').remote;
 let client = remote.getGlobal('client');
 tt({position: 'right'})
 
+tmp.setGracefulCleanup()
+
 function setlocation() {
   let projectFolder = dialog.showOpenDialogSync({properties: ["openDirectory"]});
   if (projectFolder){
@@ -41,7 +43,6 @@ function ocr() {
         execSync(commandJoin([path.join("win","PDFtk","bin","pdftk.exe"), pdfs, "cat", "output", joined_file]));
         let output = input.concat('.ocr.pdf')
         execSync(commandJoin([path.join("win","gs","bin","gswin64.exe"), "-sDEVICE=pdfwrite", "-sPAPERSIZE=letter", "-dFIXEDMEDIA", "-dPDFFitPage", "-o", output, joined_file]));
-        tempdirObject.removeCallback();
     });
   });
   buttonBlock.style.display = "block";
